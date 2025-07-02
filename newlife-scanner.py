@@ -89,15 +89,15 @@ def intro():
 # === SKANER NMAP ===
 scan_modes = {
     "1": {
-        "name": "STEALTH SCAN",
+        "name": "STEALTH SCAN | Fast & Smooth",
         "command": lambda ip: ["nmap", "-sS", "-T3", ip]
     },
     "2": {
-        "name": "VULNERS SCAN",
+        "name": "VULNERS SCAN | Slow but satisfying",
         "command": lambda ip: ["nmap", "-sV", "--script", "vulners", ip]
     },
     "3": {
-        "name": "WEIRD SCANS",
+        "name": "WEIRD SCANS | Null & FIN & Xmas",
         "command": lambda ip: [
             ["nmap", "-sN", ip],
             ["nmap", "-sF", ip],
@@ -105,12 +105,12 @@ scan_modes = {
         ]
     },
     "4": {
-        "name": "AGGRESSIVE SCAN",
+        "name": "AGGRESSIVE SCAN | Unkind but you need this",
         "command": lambda ip: ["nmap", "-A", "-T4", ip]
     },
     "5": {
-        "name": "UDP SCAN",
-        "command": lambda ip: ["nmap", "-sU", "-p", "53,123,161,500", ip]
+        "name": "Full UDP & TCP SCAN | You got time, and motivation",
+        "command": lambda ip: ["nmap", "-sS", "sU", "-pT:-,U:-", "sV", ip]
     }
 }
 
