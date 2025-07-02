@@ -89,15 +89,15 @@ def intro():
 # === SKANER NMAP ===
 scan_modes = {
     "1": {
-        "name": "STEALTH SCAN | Fast & Smooth",
+        "name": "STEALTH SCAN",
         "command": lambda ip: ["nmap", "-sS", "-T3", ip]
     },
     "2": {
-        "name": "VULNERS SCAN | Slow but satisfying",
+        "name": "VULNERS SCAN",
         "command": lambda ip: ["nmap", "-sV", "--script", "vulners", ip]
     },
     "3": {
-        "name": "WEIRD SCANS | Null & FIN & Xmas",
+        "name": "WEIRD SCANS",
         "command": lambda ip: [
             ["nmap", "-sN", ip],
             ["nmap", "-sF", ip],
@@ -105,12 +105,16 @@ scan_modes = {
         ]
     },
     "4": {
-        "name": "AGGRESSIVE SCAN | Unkind but you need this",
+        "name": "AGGRESSIVE SCAN",
         "command": lambda ip: ["nmap", "-A", "-T4", ip]
     },
     "5": {
-        "name": "Full UDP & TCP SCAN | You got time, and motivation",
-        "command": lambda ip: ["nmap", "-sS", "sU", "-pT:-,U:-", "sV", ip]
+        "name": "COMMON PORTS TCP & UDP",
+        "command": lambda ip: ["nmap", "-sS", "-sU", "--top-ports", "50", ip]
+    },
+    "6": {
+        "name": "FULL TCP & UDP PORT SCAN",
+        "command": lambda ip: ["nmap", "-sS", "-sU", "-p", "1-65535", ip]
     }
 }
 
@@ -122,7 +126,7 @@ def ask_input():
     for k, v in scan_modes.items():
         print(f" {k}. {v['name']}")
 
-    scan_choice = input(YELLOW + "\nWybierz tryb skanowania (1-5): " + RESET)
+    scan_choice = input(YELLOW + "\nWybierz tryb skanowania (1-6): " + RESET)
     return target_ip.strip(), output_file.strip(), scan_choice.strip()
 
 def execute_scan(cmd_list, output_file, label):
